@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-layout">
+
+    <div class="stats-grid">
+        <div class="hud-card">
+            <span class="hud-label">Dólar</span>
+            <span class="hud-value">R$ {{ cotacao_dolar }}</span>
+        </div>
+
+        <div class="hud-card">
+            <span class="hud-label">Clima</span>
+            <span class="hud-value">{{ temperatura }}°C</span>
+        </div>
+
+        <div class="hud-card">
+            <span class="hud-label">CPU</span>
+            <span class="hud-value">{{ cpu }}%</span>
+            <div class="hud-bar">
+                <div class="hud-bar-fill" style="width: {{ cpu }}%;"></div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <span class="hud-label">RAM</span>
+            <span class="hud-value">{{ ram }}%</span>
+            <div class="hud-bar">
+                <div class="hud-bar-fill" style="width: {{ ram }}%;"></div>
+            </div>
+        </div>
+
+        <div class="hud-card">
+            <span class="hud-label">Disco</span>
+            <span class="hud-value">{{ disc }}%</span>
+            <div class="hud-bar">
+                <div class="hud-bar-fill" style="width: {{ disc }}%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hud-card hud-sidebar">
+        <span class="hud-label">Dispositivos na rede</span>
+        <ul id="lista-dispositivos" class="device-list">
+            <li>Carregando...</li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

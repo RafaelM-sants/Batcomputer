@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Batcomputer{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="hud-frame">
+        <header class="hud-header">
+            <div class="bat-logo"></div>
+            <h1 class="hud-title">HOMELAB</h1>
+            <div class="hud-clock" id="clock">00:00:00</div>
+        </header>
+
+        <nav class="hud-nav">
+            <a href="/" class="nav-item">Início</a>
+            <a href="/sobre" class="nav-item">...</a>
+        </nav>
+
+        <main class="hud-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
