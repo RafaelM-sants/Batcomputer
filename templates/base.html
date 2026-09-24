@@ -9,23 +9,50 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="hud-frame">
-        <header class="hud-header">
-            <div class="bat-logo"></div>
-            <h1 class="hud-title">HOMELAB</h1>
-            <div class="hud-clock" id="clock">00:00:00</div>
-        </header>
+    <div class="app-shell">
 
-        <nav class="hud-nav">
-            <a href="/" class="nav-item">Início</a>
-            <a href="/sobre" class="nav-item">...</a>
+        <nav class="side-nav">
+            <a href="/" class="nav-icon" title="Início">
+                <span class="nav-icon-circle">🏠</span>
+                <span class="nav-icon-label">Início</span>
+            </a>
+            <a href="/sobre" class="nav-icon" title="Sobre mim">
+                <span class="nav-icon-circle">👤</span>
+                <span class="nav-icon-label">Sobre</span>
+            </a>
         </nav>
 
-        <main class="hud-content">
-            {% block content %}
-            {% endblock %}
-        </main>
+        <div class="main-area">
+
+            <header class="hud-header">
+                <h1 class="hud-title">BATCOMPUTER</h1>
+                <div class="top-readouts">
+                    <div class="readout" id="clock">--:--:--</div>
+                    <div class="readout">Clima {% block clima_readout %}{% endblock %}</div>
+                    <div class="readout">R$ {% block dolar_readout %}{% endblock %}</div>
+                </div>
+            </header>
+
+            <div class="bat-symbol-layer">
+                <img class="bat-symbol" src="{{ url_for('static', filename='img/batsinal.png') }}" alt="Símbolo do morcego">
+            </div>
+
+            <main class="hud-content">
+                {% block content %}
+                {% endblock %}
+            </main>
+
+            <footer class="hud-footer">
+                <span class="footer-tag">SYSTEM</span>
+                <span class="footer-line"></span>
+                <span class="footer-tag">STATUS: ONLINE</span>
+                <span class="footer-line"></span>
+                <span class="footer-tag">RAFAEL HOMELAB</span>
+            </footer>
+
+        </div>
     </div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

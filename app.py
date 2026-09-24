@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/") 
 def home():
     try: 
         dolar = requests.get(url="https://economia.awesomeapi.com.br/json/last/USD-BRL")

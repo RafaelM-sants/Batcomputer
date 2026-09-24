@@ -1,42 +1,53 @@
 {% extends "base.html" %}
+
+{% block clima_readout %}{{ temperatura }}°C{% endblock %}
+{% block dolar_readout %}R$ {{ cotacao_dolar }}{% endblock %}
+
 {% block content %}
 
 <div class="dashboard-layout">
 
-    <div class="stats-grid">
-        <div class="hud-card">
-            <span class="hud-label">Dólar</span>
-            <span class="hud-value">R$ {{ cotacao_dolar }}</span>
-        </div>
+    <div class="gauges-row">
 
-        <div class="hud-card">
-            <span class="hud-label">Clima</span>
-            <span class="hud-value">{{ temperatura }}°C</span>
-        </div>
-
-        <div class="hud-card">
-            <span class="hud-label">CPU</span>
-            <span class="hud-value">{{ cpu }}%</span>
-            <div class="hud-bar">
-                <div class="hud-bar-fill" style="width: {{ cpu }}%;"></div>
+        <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 120 120">
+                <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
+                <circle class="gauge-fill" cx="60" cy="60" r="52"
+                    style="stroke-dasharray: 326.7; stroke-dashoffset: {{ 326.7 - (326.7 * cpu / 100) }};">
+                </circle>
+            </svg>
+            <div class="gauge-label">
+                <span class="gauge-value">{{ cpu }}%</span>
+                <span class="gauge-name">CPU</span>
             </div>
         </div>
 
-        <div class="hud-card">
-            <span class="hud-label">RAM</span>
-            <span class="hud-value">{{ ram }}%</span>
-            <div class="hud-bar">
-                <div class="hud-bar-fill" style="width: {{ ram }}%;"></div>
+        <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 120 120">
+                <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
+                <circle class="gauge-fill" cx="60" cy="60" r="52"
+                    style="stroke-dasharray: 326.7; stroke-dashoffset: {{ 326.7 - (326.7 * ram / 100) }};">
+                </circle>
+            </svg>
+            <div class="gauge-label">
+                <span class="gauge-value">{{ ram }}%</span>
+                <span class="gauge-name">RAM</span>
             </div>
         </div>
 
-        <div class="hud-card">
-            <span class="hud-label">Disco</span>
-            <span class="hud-value">{{ disc }}%</span>
-            <div class="hud-bar">
-                <div class="hud-bar-fill" style="width: {{ disc }}%;"></div>
+        <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 120 120">
+                <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
+                <circle class="gauge-fill" cx="60" cy="60" r="52"
+                    style="stroke-dasharray: 326.7; stroke-dashoffset: {{ 326.7 - (326.7 * disc / 100) }};">
+                </circle>
+            </svg>
+            <div class="gauge-label">
+                <span class="gauge-value">{{ disc }}%</span>
+                <span class="gauge-name">DISCO</span>
             </div>
         </div>
+
     </div>
 
     <div class="hud-card hud-sidebar">
