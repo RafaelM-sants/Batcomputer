@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block clima_readout %}{{ temperatura }}°C{% endblock %}
-{% block dolar_readout %}R$ {{ cotacao_dolar }}{% endblock %}
+{% block dolar_readout %} {{ cotacao_dolar }}{% endblock %}
 
 {% block content %}
 
@@ -50,11 +50,60 @@
 
     </div>
 
-    <div class="hud-card hud-sidebar">
-        <span class="hud-label">Dispositivos na rede</span>
-        <ul id="lista-dispositivos" class="device-list">
-            <li>Carregando...</li>
-        </ul>
+<div class="side-column">
+
+        <div class="hud-card hud-sidebar">
+            <span class="hud-label">Dispositivos na rede</span>
+            <ul id="lista-dispositivos" class="device-list">
+                <li>Carregando...</li>
+            </ul>
+        </div>
+
+        <div class="hud-card hud-sidebar">
+            <span class="hud-label">Tarefas</span>
+            <ul id="tarefas" class="device-list">
+                {% for tarefa in tarefas %}
+                    <li class="{% if tarefa[3] == 'Concluido' %}tarefa-concluida
+                        {% elif tarefa[3] == 'Pendente' %}tarefa-pendente
+                        {% else %}tarefa-andamento{% endif %}">
+                        <span>{{ tarefa[1] }}</span>
+                        <span>{{ tarefa[2] }}</span>
+                        <span>{{ tarefa[4] }}</span>
+                        <span>{{ tarefa[5] }}</span>
+                        <span>{{ tarefa[3] }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="hud-card hud-form">
+            <details>
+                <summary class="hud-label">Nova tarefa</summary>
+                <form action="/formulario" method="POST" class="task-form">
+
+                    <input type="text" name="nome" placeholder="Nome da tarefa" required>
+                    <input type="text" name="materia" placeholder="Matéria / Projeto">
+                    <input type="date" name="prazo">
+
+                    <select name="tipo" required>
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="Faculdade">Faculdade</option>
+                        <option value="Projeto">Projeto</option>
+                    </select>
+
+                    <select name="status" required>
+                        <option value="" disabled selected>Status</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Concluido">Concluído</option>
+                    </select>
+
+                    <button type="submit">Adicionar</button>
+
+                </form>
+            </details>
+        </div>
+
     </div>
 
 </div>
