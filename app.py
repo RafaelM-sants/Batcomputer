@@ -110,6 +110,56 @@ def formulario():
 
     return redirect(url_for("home"))
 
+@app.route("/alterar_formulario", methods=['POST'])
+def atualiza_status():
+    tar_id = request.form.get('tar_id', type=int)
+    novo_status = request.form.get("status")
+
+    status_permitido = ['Pendente', 'Em andamento', 'Concluido']
+
+    if tar_id is None:
+        return 'ID da tarefa invalida', 400 
+
+    if novo_status not in status_permitido:
+        return 'Status invalido', 400
+
+    conexao = mysql.connector.connect(**bd_config)
+    cursor = conexao.cursor()
+
+    try:
+        cursor.execute(
+            "" \
+            "UPDATE tarefas " \
+            "SET tar_status = %s WHERE tar_id = %s",
+            (novo_status, tar_id)
+        )
+        conexao.commit()
+    finally:
+        cursor.close()
+        conexao.close()
+
+    return redirect(url_for("home"))
+
+
+@app.route('/deletar-tarefa', methods=['POST'])
+def deleta_tarefa():
+    tar_id = request.form.get('tar_id', type=int)
+    conexao = mysql.connector.connect(**bd_config )
+
+    cursor = conexao.cursor()
+
+    try:
+        cursor.execute (
+            'DELETE FROM tarefas WHERE tar_id = %s', (tar_id,)
+        )
+        conexao.commit()
+    finally:
+        cursor.close()
+        conexao.close()
+
+    return redirect(url_for("home"))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -247,6 +247,7 @@ body {
 }
 
 .device-list li {
+    position: relative;
     font-size: 0.85rem;
     padding: 6px 10px;
     background-color: rgba(0, 217, 255, 0.08);
@@ -291,35 +292,27 @@ body {
     background-color: rgba(245, 197, 66, 0.08);
 }
 
-/* Rodapé esquemático */
-.hud-footer {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 30px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(0, 217, 255, 0.3);
-    position: relative;
-    z-index: 2;
+/* Formulário de nova tarefa (dentro do <details>) */
+.hud-form summary {
+    cursor: pointer;
+    list-style: none;
 }
 
-.footer-tag {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+.hud-form summary::-webkit-details-marker {
+    display: none;
+}
+
+.hud-form summary::before {
+    content: "▸ ";
     color: var(--accent);
-    opacity: 0.7;
-    white-space: nowrap;
 }
 
-.footer-line {
-    flex: 1;
-    height: 1px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--accent) 0px, var(--accent) 4px,
-        transparent 4px, transparent 8px
-    );
-    opacity: 0.4;
+.hud-form details[open] summary::before {
+    content: "▾ ";
+}
+
+.hud-form .task-form {
+    margin-top: 12px;
 }
 
 .task-form {
@@ -364,25 +357,80 @@ body {
     box-shadow: 0 0 12px var(--accent-glow);
 }
 
-.hud-form summary {
-    cursor: pointer;
-    list-style: none;
+/* Seletor de status por tarefa */
+.status-form {
+    margin-top: 6px;
 }
 
-.hud-form summary::-webkit-details-marker {
-    display: none;
-}
-
-.hud-form summary::before {
-    content: "▸ ";
+.status-form select {
+    width: 100%;
+    background-color: var(--bg-dark);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 4px;
+    padding: 4px 8px;
     color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
 }
 
-.hud-form[open] summary::before,
-.hud-form details[open] summary::before {
-    content: "▾ ";
+.status-form select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent-glow);
 }
 
-.hud-form .task-form {
-    margin-top: 12px;
+/* Botão de excluir tarefa */
+.delete-form {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 4px;
+    transition: text-shadow 0.2s ease;
+}
+
+.delete-btn:hover {
+    text-shadow: 0 0 8px #ff4d4d;
+}
+
+/* Rodapé esquemático */
+.hud-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 217, 255, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.footer-tag {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.footer-line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--accent) 0px, var(--accent) 4px,
+        transparent 4px, transparent 8px
+    );
+    opacity: 0.4;
 }

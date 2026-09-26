@@ -71,6 +71,21 @@
                         <span>{{ tarefa[4] }}</span>
                         <span>{{ tarefa[5] }}</span>
                         <span>{{ tarefa[3] }}</span>
+
+                        <form action="{{ url_for('atualiza_status') }}" method="POST" class="status-form">
+                            <input type="hidden" name="tar_id" value="{{ tarefa[0] }}">
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="Pendente" {% if tarefa[3] == 'Pendente' %}selected{% endif %}>Pendente</option>
+                                <option value="Em andamento" {% if tarefa[3] == 'Em andamento' %}selected{% endif %}>Em andamento</option>
+                                <option value="Concluido" {% if tarefa[3] == 'Concluido' %}selected{% endif %}>Concluído</option>
+                            </select>
+                        </form>
+
+                        <form action="{{ url_for('deleta_tarefa') }}" method="POST" class="delete-form">
+                            <input type="hidden" name="tar_id" value="{{ tarefa[0] }}">
+                            <button type="submit" class="delete-btn" title="Excluir tarefa">✕</button>
+                        </form>
+
                     </li>
                 {% endfor %}
             </ul>
