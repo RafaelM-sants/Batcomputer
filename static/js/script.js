@@ -59,3 +59,18 @@ function montarCalendario() {
 }
 
 montarCalendario();
+
+
+function filtraTarefas(status) {
+    document.querySelectorAll('#tarefas li').forEach(tarefa => {
+        if (status === 'todas') {
+            tarefa.style.display = 'list-item';
+        } else if (status === 'pendentes' && (tarefa.classList.contains('tarefa-pendente') || tarefa.classList.contains('tarefa-andamento'))) {
+    tarefa.style.display = 'list-item';
+        } else if (status === 'concluidas' && tarefa.classList.contains('tarefa-concluida')) {
+        tarefa.style.display = 'list-item';
+        } else {
+            tarefa.style.display = 'none';
+        }
+    });
+}

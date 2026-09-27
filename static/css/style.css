@@ -475,3 +475,28 @@ body {
     font-weight: 700;
     box-shadow: 0 0 8px var(--accent-glow);
 }
+
+.filter-buttons {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.filter-buttons button {
+    flex: 1;
+    background-color: var(--bg-dark);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 4px;
+    padding: 4px 6px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-buttons button:hover {
+    background-color: var(--accent-glow);
+    box-shadow: 0 0 8px var(--accent-glow);
+}

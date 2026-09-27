@@ -58,9 +58,9 @@ def home():
     return render_template("index.html", cotacao_dolar=cotacao_dolar, temperatura=temperatura, cpu=cpu, ram=ram, disc=disc, tarefas=tarefas)
 
 
-@app.route("/sobre")
+@app.route("/music")
 def sobre():
-    return render_template("sobre.html")
+    return render_template("music.html")
 
 #Cria a função que testas os ip, se retorna 0 ok se retornar qualquer valor diferente disso none
 def testar_ip(ip_teste):

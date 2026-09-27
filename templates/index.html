@@ -61,6 +61,12 @@
 
         <div class="hud-card hud-sidebar">
             <span class="hud-label">Tarefas</span>
+            <div class="filter-buttons">
+                <button onclick="filtraTarefas('todas')">Todas</button>
+                <button onclick="filtraTarefas('pendentes')">Pendentes</button>
+                <button onclick="filtraTarefas('concluidas')">Concluídas</button>
+            </div>
+            
             <ul id="tarefas" class="device-list">
                 {% for tarefa in tarefas %}
                     <li class="{% if tarefa[3] == 'Concluido' %}tarefa-concluida
