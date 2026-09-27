@@ -23,3 +23,39 @@ fetch("/scan-rede")
             lista.appendChild(item);
         });
     });
+
+
+function montarCalendario() {
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = hoje.getMonth();
+
+    const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+    document.getElementById("calendar-month-year").textContent = `${nomesMeses[mes]} ${ano}`;
+
+    const primeiroDiaSemana = new Date(ano, mes, 1).getDay();
+    const totalDiasNoMes = new Date(ano, mes + 1, 0).getDate();
+
+    const container = document.getElementById("calendar-days");
+    container.innerHTML = "";
+
+    for (let i = 0; i < primeiroDiaSemana; i++) {
+        const vazio = document.createElement("span");
+        container.appendChild(vazio);
+    }
+
+    for (let dia = 1; dia <= totalDiasNoMes; dia++) {
+        const celula = document.createElement("span");
+        celula.textContent = dia;
+
+        if (dia === hoje.getDate()) {
+            celula.classList.add("calendar-today");
+        }
+
+        container.appendChild(celula);
+    }
+}
+
+montarCalendario();
