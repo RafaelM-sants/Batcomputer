@@ -4,7 +4,7 @@ import psutil
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import mysql.connector
-from config import bd_config, ip_fix
+from config import bd_config, ip_fix, api_noticia
 
 app = Flask(__name__)
 
@@ -58,17 +58,31 @@ def home():
     return render_template("index.html", cotacao_dolar=cotacao_dolar, temperatura=temperatura, cpu=cpu, ram=ram, disc=disc, tarefas=tarefas)
 
 
-@app.route("/music")
-def sobre():
-    return render_template("music.html")
+@app.route("/noticias")
+def noticia():
+    try:
+        #puxa a api externa
+       noticia = requests.get(url=api_noticia)
+       #converte a resposta da API em um dicionário Python
+       noticia_js = noticia.json()
+       
+       noticias_tec = noticia_js.get('articles', [])
+       
+    except requests.exceptions.RequestException:
+       noticias_tec = []
 
+    
+    return render_template("noticias.html", noticias_tec=noticias_tec)
+
+
+# -------------------------------------------------------------------------------------------------------
 #Cria a função que testas os ip, se retorna 0 ok se retornar qualquer valor diferente disso none
 def testar_ip(ip_teste):
     resultado = subprocess.run(["ping", "-c", "1", "-W", "1", ip_teste], stdout=subprocess.DEVNULL)
     if resultado.returncode == 0:
         return ip_teste
     return None
-
+#---------------------------------------------------------------------------------------------------------
 
 # cria a rota para o escaner de rede
 @app.route("/scan-rede")

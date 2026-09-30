@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="titulo_noticia">Notícias</h1>
+<div class="news-container">
+    {% if noticias_tec %}
+        <div class="news-grid">
+            {% for artigo in noticias_tec %}
+                <article class="noticia-card">
+                    <h3>
+                        <a href="{{ artigo.url }}" target="_blank">{{ artigo.title }}</a>
+                    </h3>
+                    
+                    <p>{{ artigo.description or 'Sem descrição disponível para esta transmissão de dados.' }}</p>
+                    
+                    <a href="{{ artigo.url }}" target="_blank" class="noticia-btn">
+                        Acessar Link &#10132;
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="news-empty-state">
+            [ALERTA DE SISTEMA] Nenhuma notícia encontrada ou sinal de API indisponível.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

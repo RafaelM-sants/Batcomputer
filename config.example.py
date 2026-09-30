@@ -6,3 +6,5 @@ bd_config = {
 }
 
 ip_fix = "***.***.*."
+
+api_noticia = "https://gnews.io/api/v4/top-headlines?category=technology&lang=pt&apikey=SUA_CHAVE"

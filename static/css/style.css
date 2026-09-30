@@ -500,3 +500,157 @@ body {
     background-color: var(--accent-glow);
     box-shadow: 0 0 8px var(--accent-glow);
 }
+
+/* ==========================================================================
+   MÓDULO: NOTÍCIAS TECH (HUD FEED)
+   ========================================================================== */
+
+/* Container principal de notícias */
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Grid ou lista de cards de notícias */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* Card individual da notícia */
+.noticia-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito de detalhe/corte sci-fi no canto superior do card */
+.noticia-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: transparent var(--accent) transparent transparent;
+    opacity: 0.8;
+}
+
+.noticia-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px var(--accent-glow);
+}
+
+/* Título da notícia */
+.noticia-card h3 {
+    font-family: var(--font-title);
+    font-size: 1rem;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.noticia-card h3 a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.noticia-card h3 a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Descrição/Corpo do texto */
+.noticia-card p {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: rgba(214, 247, 255, 0.8);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Metadados/Rodapé do Card (Data, Autor, Fonte) */
+.noticia-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: var(--accent);
+    opacity: 0.7;
+    border-top: 1px dashed rgba(0, 217, 255, 0.2);
+    padding-top: 10px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Botão/Link "Ler Artigo Completo" */
+.noticia-btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px 12px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.noticia-btn:hover {
+    background-color: var(--accent-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
+    color: #fff;
+}
+
+/* Mensagem quando nenhuma notícia for encontrada ou houver erro */
+.news-empty-state {
+    background-color: var(--bg-panel);
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    box-shadow: inset 0 0 15px rgba(0, 217, 255, 0.05);
+}
+
+.titulo_noticia {
+    margin-bottom: 1.8%;
+    /* display: inline-block faz a caixa ajustar exatamente ao tamanho do texto */
+    display: inline-block; 
+    color: var(--accent);
+    font-family: var(--font-title);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.titulo_noticia:hover {
+    /* Muda apenas a cor do texto */
+    color: #ffffff;
+    /* Aplica o brilho neon diretamente nas letras */
+    text-shadow: 0 0 12px var(--accent), 0 0 20px var(--accent-glow);
+}
