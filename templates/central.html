@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Central de Comandos{% endblock %}
+{% block content %}
+
+<div class="hud-card central-card">
+    <span class="hud-label">Central de comandos — Monitor do servidor</span>
+
+    <div class="central-buttons">
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="ram">
+            <button type="submit">RAM</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="cpu">
+            <button type="submit">CPU</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="disco">
+            <button type="submit">Disco</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="containers">
+            <button type="submit">Containers</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="tailscale">
+            <button type="submit">Tailscale</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="tempo">
+            <button type="submit">Tempo ligado</button>
+        </form>
+        <form action="{{ url_for('central') }}" method="POST">
+            <input type="hidden" name="opcao" value="todos">
+            <button type="submit">Tudo</button>
+        </form>
+    </div>
+</div>
+
+{% if saida %}
+<div class="hud-card output-card">
+    <span class="hud-label">Resultado</span>
+    <pre class="output-pre">{{ saida }}</pre>
+</div>
+{% endif %}
+
+{% endblock %}

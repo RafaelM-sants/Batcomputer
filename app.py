@@ -5,6 +5,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor
 import mysql.connector
 from config import bd_config, ip_fix, api_noticia
+from config import scripts_permitidos
 
 app = Flask(__name__)
 
@@ -58,6 +59,7 @@ def home():
     return render_template("index.html", cotacao_dolar=cotacao_dolar, temperatura=temperatura, cpu=cpu, ram=ram, disc=disc, tarefas=tarefas)
 
 
+
 @app.route("/noticias")
 def noticia():
     try:
@@ -74,6 +76,20 @@ def noticia():
     
     return render_template("noticias.html", noticias_tec=noticias_tec)
 
+@app.route("/central", methods=['GET', 'POST'])
+def central():
+    opcao = request.form.get("opcao")  # Obtém a opção selecionada no formulário
+
+    if opcao in scripts_permitidos:
+        dados = scripts_permitidos[opcao]
+        resultado = subprocess.run(dados["comando"], cwd=dados["pasta"], capture_output=True, text=True)
+        saida = resultado.stdout
+    elif opcao is None:
+        saida = None  
+    else:
+        return "Opção inválida"
+    return render_template("central.html", saida=saida)
+    
 
 # -------------------------------------------------------------------------------------------------------
 #Cria a função que testas os ip, se retorna 0 ok se retornar qualquer valor diferente disso none
