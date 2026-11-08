@@ -1,0 +1,9 @@
+config.py
+venv/
+__pycache__/
+scripts/
+.git/
+.gitignore
+.dockerignore
+README.md
+databse/
