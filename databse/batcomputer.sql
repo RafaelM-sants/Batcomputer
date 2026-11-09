@@ -1,4 +1,4 @@
-create database batcomputer;
+create database if not exists batcomputer;
 
 use batcomputer;
 
