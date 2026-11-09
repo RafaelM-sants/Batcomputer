@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: batcomputer-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      # dados do banco ficam no HD (pasta definida no .env)
+      - ${DATA_DIR:?defina DATA_DIR no arquivo .env}/mysql:/var/lib/mysql
+      # roda uma unica vez, na primeira subida com o banco vazio
+      - ./databse/batcomputer.sql:/docker-entrypoint-initdb.d/batcomputer.sql:ro
+
+  app:
+    image: rafaelmsants/batcomputer:latest
+    container_name: batcomputer-app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      # so aceita conexoes de dentro do proprio servidor (o nginx do host repassa)
+      - "127.0.0.1:5000:5000"
+    volumes:
+      # config.py real fica no servidor, fora da imagem
+      - ./config.py:/app/config.py:ro
